@@ -11,11 +11,18 @@ namespace CursoBackend.Controllers
         public List<People> GetPeople() => Repository.People;
 
         [HttpGet("{id}")]
-        public People Get(int id) => Repository.People.First(p => p.Id == id);
+        public ActionResult<People> Get(int id) { 
+            var person = Repository.People.FirstOrDefault(p => p.Id == id);
+            if (person == null)
+            {
+                return NotFound("No ta");
+            }
+            return Ok(person);
+        }
 
         [HttpGet("search/{name}")]
-        public People Get(string name) => 
-            ;
+        public List<People> Get(string name) => 
+            Repository.People.Where(p => p.Name.ToLower().Contains(name.ToLower())).ToList();
     }
 
     public class Repository
