@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 
 namespace CursoBackend.Controllers
 {
@@ -23,7 +25,23 @@ namespace CursoBackend.Controllers
         [HttpGet("search/{name}")]
         public List<People> Get(string name) => 
             Repository.People.Where(p => p.Name.ToLower().Contains(name.ToLower())).ToList();
+
+        [HttpPost]
+        public IActionResult Add(People people)
+        {
+            
+            if (people.Name == null || people.Name == "")
+            {
+                return BadRequest();
+            }
+
+            Repository.People.Add(people);
+
+            return NoContent();
+        }
     }
+
+   
 
     public class Repository
     {
