@@ -1,12 +1,10 @@
 name: GitHub Actions Hello test
-
 on:
     schedule:
         - cron: '* * * * *'
 jobs:
     say-hello:
         runs-on: ubuntu-latest
-
         steps:
             - name: Checkout Repo
               uses: actions/checkout@v2
