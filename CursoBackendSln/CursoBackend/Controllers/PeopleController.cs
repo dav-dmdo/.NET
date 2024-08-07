@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CursoBackend.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 
 namespace CursoBackend.Controllers
 {
@@ -7,16 +10,45 @@ namespace CursoBackend.Controllers
     [ApiController]
     public class PeopleController : ControllerBase
     {
+
+        private IPeopleService _peopleService;
+
+        public PeopleController([FromKeyedServices("peopleService")] IPeopleService peopleService) => _peopleService = peopleService;
+
+
         [HttpGet("all")]
         public List<People> GetPeople() => Repository.People;
 
         [HttpGet("{id}")]
-        public People Get(int id) => Repository.People.First(p => p.Id == id);
+        public ActionResult<People> Get(int id) { 
+            var person = Repository.People.FirstOrDefault(p => p.Id == id);
+            if (person == null)
+            {
+                return NotFound("No ta");
+            }
+            return Ok(person);
+        }
 
         [HttpGet("search/{name}")]
-        public People Get(string name) => 
-            ;
+        public List<People> Get(string name) => 
+            Repository.People.Where(p => p.Name.ToLower().Contains(name.ToLower())).ToList();
+
+        [HttpPost]
+        public IActionResult Add(People people)
+        {
+            
+            if (!_peopleService.Validate(people))
+            {
+                return BadRequest();
+            }
+
+            Repository.People.Add(people);
+
+            return NoContent();
+        }
     }
+
+   
 
     public class Repository
     {
@@ -34,7 +66,7 @@ namespace CursoBackend.Controllers
     public class People
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public DateTime Birthdate { get; set; }
     }
 
