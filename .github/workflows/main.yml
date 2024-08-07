@@ -1,4 +1,5 @@
 name: Call API every 15 min
+run-name: ${{github.actor}} - ${{github.event.schedule}} 
 
 on:
   schedule:
