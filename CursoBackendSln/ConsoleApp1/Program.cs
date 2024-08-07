@@ -6,6 +6,20 @@ using System.Threading.Tasks;
 
 string url = "https://localhost:7062/api/people/all";
 Console.WriteLine(url);
+HttpClient client = new();
+try
+{
+    var response = await client.GetAsync(url);
+    var body = response.Content.ReadAsStringAsync();
+    System.Console.WriteLine("Response body: "+body);
+}
+catch (System.Exception e)
+{
+    
+    System.Console.WriteLine(e);
+}
+
+
 
 // using (HttpClient client = new HttpClient())
 // {
