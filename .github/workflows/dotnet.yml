@@ -26,6 +26,6 @@ jobs:
             ls ${{ github.workspace }}
             dotnet restore
     - name: Build
-      run: dotnet build --no-restore --project ./CursoBackendSln/CursoBackend
+      run: dotnet build --no-restore 
     - name: Test
-      run: dotnet test --no-build --verbosity normal --project ./CursoBackendSln/CursoBackend
+      run: dotnet test --no-build --verbosity normal 
