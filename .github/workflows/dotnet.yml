@@ -21,7 +21,10 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore --project ./CursoBackendSln/CursoBackend
+      run: |
+            cd ./CursoBackendSln/CursoBackend
+            ls ${{ github.workspace }}
+            dotnet restore
     - name: Build
       run: dotnet build --no-restore --project ./CursoBackendSln/CursoBackend
     - name: Test
