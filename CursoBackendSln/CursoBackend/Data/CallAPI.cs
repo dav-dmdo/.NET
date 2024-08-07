@@ -7,7 +7,7 @@ class ApiCaller
 {
     static async Task Main(string[] args)
     {
-        string url = "https://api.ejemplo.com/endpoint";
+        string url = "https://localhost:7062/api/people/all ";
 
         using (HttpClient client = new HttpClient())
         {
