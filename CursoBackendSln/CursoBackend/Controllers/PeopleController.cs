@@ -12,11 +12,8 @@ namespace CursoBackend.Controllers
     {
 
         private IPeopleService _peopleService;
-        
-        public PeopleController([FromKeyedServices("peopleService")]IPeopleService peopleService)
-        {
-            _peopleService = peopleService;
-        }
+
+        public PeopleController([FromKeyedServices("peopleService")] IPeopleService peopleService) => _peopleService = peopleService;
 
 
         [HttpGet("all")]
