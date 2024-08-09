@@ -1,3 +1,5 @@
+using CursoBackend.Services.Interfaces;
+
 namespace CursoBackend.Services
 {
     public class RandomService : IRandomService

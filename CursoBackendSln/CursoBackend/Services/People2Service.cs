@@ -1,4 +1,5 @@
 using CursoBackend.Controllers;
+using CursoBackend.Services.Interfaces;
 
 namespace CursoBackend.Services
 {

@@ -1,6 +1,6 @@
 using CursoBackend.Controllers;
 
-namespace CursoBackend.Services
+namespace CursoBackend.Services.Interfaces
 {
     public interface IPeopleService
     {

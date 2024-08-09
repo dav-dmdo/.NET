@@ -1,4 +1,4 @@
-namespace CursoBackend.Services
+namespace CursoBackend.Services.Interfaces
 {
     public interface IRandomService
     {

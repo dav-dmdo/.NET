@@ -1,6 +1,8 @@
 using CursoBackend.Services;
+using CursoBackend.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CursoBackend.Services.Interfaces;
 
 namespace CursoBackend.Controllers
 {
