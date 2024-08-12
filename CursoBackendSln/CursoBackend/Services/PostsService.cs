@@ -8,13 +8,13 @@ namespace CursoBackend.Services
     {
         public HttpClient _client;
 
-        public PostsService()
+        public PostsService(HttpClient client)
         {
-            _client = new HttpClient();
+            _client = client;
         }
         public async Task<IEnumerable<PostDTO>> Get()
         {
-            string url = "https://jsonplaceholder.typicode.com/posts";
+            var url = _client.BaseAddress;
             var response = await _client.GetAsync(url);
             var body = await response.Content.ReadAsStringAsync();
 
