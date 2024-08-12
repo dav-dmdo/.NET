@@ -35,5 +35,3 @@ jobs:
             cd ./CursoBackendSln/CursoBackend
             ls ${{ github.workspace }}
             dotnet test --no-build --verbosity normal 
-    - name: Running CallAPI.cs
-      run: dotnet run --project ./CursoBackendSln/ConsoleApp1
