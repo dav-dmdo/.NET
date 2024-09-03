@@ -1,5 +1,7 @@
 using CursoBackend.Services;
 using CursoBackend.Services.Interfaces;
+using CursoBackend.Models;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,11 +21,25 @@ builder.Services.AddScoped<IPostsService, PostsService>();
 builder.Services.AddHttpClient<IPostsService, PostsService>(
     client => 
     {
-        client.BaseAddress = new Uri(builder.Configuration["BaseUrlPosts"]);
+        var baseUrl = builder.Configuration["BaseUrlPosts"];
+        if (!string.IsNullOrEmpty(baseUrl))
+        {
+            client.BaseAddress = new Uri(baseUrl);
+        }
+        else
+        {
+            throw new ArgumentNullException("BaseUrlPosts", "BaseUrlPosts configuration value is missing or empty.");
+        }
     }
 );
 
+// Context DB Connection · EF Core
+builder.Services.AddDbContext<TiendaDotnetContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TiendaDotnetConnection"));
+});
 
+System.Console.WriteLine(builder.Configuration["OtherKey:Prueba:TiendaDotnetConnection1"]);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

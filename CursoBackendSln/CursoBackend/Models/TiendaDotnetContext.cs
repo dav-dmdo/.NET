@@ -2,9 +2,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CursoBackend.Models
 {
-    public class StoreContext : DbContext
+    public class TiendaDotnetContext : DbContext
     {
-        public StoreContext(DbContextOptions<StoreContext> options)
+        public TiendaDotnetContext(DbContextOptions<TiendaDotnetContext> options)
             : base(options)
         {
             
